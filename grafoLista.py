@@ -44,9 +44,21 @@ class Grafo:
             visitados = []
         print("  " * profundidade + f"visitando {v}")
         visitados.append(v)
-        for w in self.listaAdj[v]:
-            if w not in visitados:
-                self.dfs(w, visitados, profundidade + 1)
+        for w in self.listaAdj[v]: # passa pelos vizinho w do vertice atual
+            if w not in visitados: # verifica se já não foi visitado
+                self.dfs(w, visitados, profundidade + 1) # chama a recursão para descer mais
         return visitados
-        
-        
+
+    def bfs(self, v):
+        visitados = [v]
+        fila = [(v, 0)]
+        ordem = []
+        while fila:
+            atual, nivel = fila.pop(0)
+            print(" " * nivel + f"visitando {atual}")
+            ordem.append(atual)
+            for w in self.listaAdj[atual]: # passa pelos vizinho w do vertice atual
+                if w not in visitados: # verifica se já não foi visitado
+                    visitados.append(w)  # coloca o w na lista de visitados
+                    fila.append((w, nivel + 1)) # coloca ele na fila
+        return ordem
